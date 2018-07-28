@@ -1,8 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import folium
-from folium import plugins
-from IPython.display import HTML, display
 
 # -----
 
@@ -16,7 +13,7 @@ class Terrain(object):
         with open(self.con, "r") as file_terrain:
             for line in file_terrain:
                 terrain.append([int(x) for x in line.split()])
-        self.terrain = pd.DataFrame(terrain).as_matrix()
+        self.terrain = pd.DataFrame(terrain).values
 
     def geo_ref(self):
         pass
@@ -24,13 +21,13 @@ class Terrain(object):
     # simple show functions
 
     def show_rare(self):
-        print self.terrain
+        print(self.terrain)
 
     def show_terrain(self):
         plt.imshow(self.terrain)
         plt.gray()
         plt.show()
-
+    '''
     def show_interactive(self):
         m = folium.Map(zoom_start=3)
         folium.plugins.ImageOverlay(
@@ -39,3 +36,4 @@ class Terrain(object):
         ).add_to(m)
 
         m.save(outfile="./data/test.html")
+    '''
