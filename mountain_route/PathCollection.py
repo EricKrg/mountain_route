@@ -1,10 +1,9 @@
 
 class PathCollection(object):
-    def __init__(self, terrain):
-        self.terrain = terrain
+    def __init__(self):
         self.paths = []
         self.length = 0
         self.hdiff = 0
 
-    def search_route(self):
+    def add(self):
         pass
