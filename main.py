@@ -6,7 +6,7 @@ jena.show_rare()
 #jena.show_terrain()
 
 
-/banking-private/content/WEB-INF/html/errors/sessionTimeout.html
+
 path = []
 # main greedy algo --> should be added to searcher class
 for line in range(len(jena.terrain)-1):
