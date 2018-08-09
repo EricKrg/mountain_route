@@ -1,54 +1,67 @@
 from mountain_route import Pos,PathCollection,Terrain
+import pandas as pd
+import plotly.offline as pyo
+import  plotly.graph_objs as go
 
+'''
 jena = Terrain("./data/jena.txt")
 jena.read_terrain()
 jena.show_rare()
+
+
+jena_collection = jena.get_track()
+
+df = pd.DataFrame(columns=["x", "y","value"])
+
+for track in jena_collection.paths[2]:
+    df = df.append({
+        "x": track.x,
+        "y": track.y,
+        'value': track.value
+    }, ignore_index=True)
+
+print(df)
+path = go.Heatmap(x=df['x'],
+                  y=df['y'],
+                  z=df['value'],
+                  colorscale = [
+                      [0, 'rgb(180, 0, 0)'],
+                      [1, 'rgb(180, 0, 0)']
+                  ],
+                  showscale=False)
+terrain = jena.show_interactive()
+
+data = [terrain, path]
+pyo.plot(data)
 #jena.show_terrain()
+'''
+
+colorado = Terrain("./data/Colorado_844x480.txt")
+colorado.read_terrain()
+colorado.show_rare()
 
 
+colorado_collection = colorado.get_track()
 
-path = []
-# main greedy algo --> should be added to searcher class
-for line in range(len(jena.terrain)-1):
-    print("line {}".format(line))
-    search = True
-    posi = Pos((line, 0), jena.terrain[line][0]) # init y + x
-    path.append(posi)
-    while search:
-        if posi.y == 0:
-            steps = { posi.straigth(jena. terrain) : (posi.y, posi.x + 1) }
-            steps[posi.down(jena.terrain)] = (posi.y + 1, posi.x+1)
+df = pd.DataFrame(columns=["x", "y","value"])
 
-            min_p = steps[min(steps.keys())]
-            posi = (Pos(min_p, jena.terrain[min_p[0], min_p[1]]))
+for track in colorado_collection.paths[2]:
+    df = df.append({
+        "x": track.x,
+        "y": track.y,
+        'value': track.value
+    }, ignore_index=True)
 
-            path.append(posi)
-            print(posi.show())
-        elif posi.y == len(jena.terrain):
-            steps = {posi.straigth(jena.terrain): (posi.y, posi.x + 1)}
-            steps[posi.up(jena.terrain)] = (posi.y - 1, posi.x + 1)
+#print(df)
+path = go.Heatmap(x=df['x'],
+                  y=df['y'],
+                  z=df['value'],
+                  colorscale = [
+                      [0, 'rgb(180, 0, 0)'],
+                      [1, 'rgb(180, 0, 0)']
+                  ],
+                  showscale=False)
+terrain = colorado.show_interactive()
 
-            min_p = steps[min(steps.keys())]
-            posi = (Pos(min_p, jena.terrain[min_p[0], min_p[1]]))
-
-            path.append(posi)
-            print(posi.show())
-        else:
-            steps = {posi.straigth(jena.terrain): (posi.y, posi.x + 1)}
-            steps[posi.down(jena.terrain)] = (posi.y + 1, posi.x + 1)
-            steps[posi.up(jena.terrain)] = (posi.y - 1, posi.x + 1)
-
-            min_p = steps[min(steps.keys())]
-            posi = (Pos(min_p, jena.terrain[min_p[0], min_p[1]]))
-
-            path.append(posi)
-            print(posi.show())
-
-        if posi.x == len(jena.terrain[1])-1: # runner is at the end
-            search = False
-    #break
-    # here add path to PathCollection
-    path = []
-
-
-#paths = mountain_route.PathCollection(jena.terrain)
+data = [terrain, path]
+pyo.plot(data)
