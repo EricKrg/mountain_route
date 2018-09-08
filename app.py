@@ -18,7 +18,6 @@ app = dash.Dash()
 dir = os.path.dirname(os.path.abspath(__file__)) # get the home dir
 data_dir = os.path.join(dir,'data')
 data_list = os.listdir(os.path.join(dir,'data')) # get the data folder
-print(data_list)
 data_dict = [{'label': long, 'value': long} for long in data_list]
 
 # layout 
@@ -97,7 +96,6 @@ def route_output(file, check_list):
 
         if 'l' in check_list:
             low_pos = new_terrain.get_lowest()
-            print(low_pos)
             data.append(Display(low_pos).to_display(graph='heat',col=999))  # create display obj. for best path and low areas
             data2.append(Display(low_pos).to_display(graph='histo', col=0))
             html_return = html.Div([

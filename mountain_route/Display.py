@@ -42,6 +42,7 @@ class Display(object):
         return data
     def histo(self,col):
         data = go.Histogram(
-            x = self.df[2]
+            x = self.df[2],
+            opacity=0.75, marker=dict(color='#545659')
         )
         return data

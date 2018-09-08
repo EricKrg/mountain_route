@@ -23,7 +23,7 @@ class Terrain(object):
             collection = mr.PathCollection()   # collection obj. with all paths
             path = []   #  list of positions obj.
             #print("Nr. of routes: {}".format(range(len(self.terrain) - 1)))
-            for line in range(len(self.terrain) - 1):
+            for line in range(len(self.terrain)):
                 search = True
                 posi = mr.Pos((line, 0), self.terrain[line][0])  # init y + x
                 path.append(posi)
@@ -57,7 +57,7 @@ class Terrain(object):
 
                         path.append(posi)
 
-                    if posi.x == len(self.terrain[1]) - 1:  # runner is at the end
+                    if posi.x == len(self.terrain[1])-1: # runner is at the end
                         search = False
 
                 collection.add(mr.SinglePath(path))
