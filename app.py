@@ -33,7 +33,7 @@ app.layout = html.Div([
             style=dict(width='90%', display='table-cell')
         )
         ],
-        style = dict(width = '120%', display='table')
+        style = dict(width = '100%', display='table')
     ),
 
     dcc.RadioItems(id='check',
